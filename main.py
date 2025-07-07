@@ -117,7 +117,7 @@ def main() -> None:
     args = parser.parse_args()
 
     with AllSkyMQTTBatteryMonitor(
-        args.broker, args.topic, args.filepath, args.port, args.keepalive
+        args.broker, args.topic, args.filepathprogress, args.filepathstatic, args.port, args.keepalive
     ) as client:
         log.info(f"{client}")
         try:
