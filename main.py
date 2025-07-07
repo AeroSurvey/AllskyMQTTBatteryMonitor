@@ -3,6 +3,7 @@
 import json
 import logging
 
+import UpdateBatteryFile
 from mqtt import MQTTClient
 
 log = logging.getLogger(__name__)
@@ -44,11 +45,11 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
             payload (str): The message payload received.
         """
         logging.info(f"Message received on {topic}: {payload}")
-        # TODO: Add logic to process the message as needed
-        # access the file at self.filepath and update it with the payload
         data = json.loads(payload)
         battery_soc = int(data.get("battery_state_of_charge", "unknown"))
         battery_voltage = float(data.get("battery_voltage", "unknown"))
+        UpdateBatteryFile.update_battery_file(self.filepath, battery_soc,
+                                              battery_voltage)
         logging.info(battery_soc)
         logging.info(f"{battery_voltage:.1f}")
 
