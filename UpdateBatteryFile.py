@@ -23,7 +23,7 @@ def update_battery_file(file_path: str, battery_percent: int,
             lines[i] = "\t".join(parts)
         if "Battery Voltage" in line:
             parts = line.split("\t")
-            parts[3] = f"{battery_voltage}%"
+            parts[3] = f"{battery_voltage}v"
             parts[5] = str(battery_voltage)
             lines[i] = "\t".join(parts)
 
