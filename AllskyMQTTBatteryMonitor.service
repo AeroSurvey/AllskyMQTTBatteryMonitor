@@ -7,9 +7,9 @@ Wants=network.target
 Type=simple
 User=asi
 Group=asi
-WorkingDirectory=/home/asi/AllSkyMQTTBatteryMonitor
-Environment=PATH=/home/asi/AllSkyMQTTBatteryMonitor/.venv/bin
-ExecStart=/home/asi/AllSkyMQTTBatteryMonitor/.venv/bin/python /home/asi/AllSkyMQTTBatteryMonitor/main.py --172.17.204.35 --topic solar/pmallsky/data --/home/asi/AllskyMQTTBatteryMonitor/BatterySpecs.txt
+WorkingDirectory=/home/asi/AllskyMQTTBatteryMonitor
+Environment=PATH=/home/asi/AllskyMQTTBatteryMonitor/.venv/bin
+ExecStart=/home/asi/AllskyMQTTBatteryMonitor/.venv/bin/python /home/asi/AllskyMQTTBatteryMonitor/main.py --broker 172.17.204.35 --topic solar/pmallsky/data --filepath /home/asi/AllskyMQTTBatteryMonitor/BatterySpecs.txt
 Restart=always
 RestartSec=10
 StandardOutput=journal
