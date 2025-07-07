@@ -1,0 +1,3 @@
+data	0	Property	AeroSurvey Inc
+data	0	Deployment	Activated at ASSET 07/03/2025 -Talyn Propst
+data	0	Battery Voltage	0v

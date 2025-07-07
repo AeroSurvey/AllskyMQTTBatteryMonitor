@@ -1,3 +1,2 @@
 #Type		Timeout	Label		Data	Min	Current	Maximum	Danger	Warning
 progress	0	Battery Percent	0%	0	0	100	102	101
-data	0	Battery Voltage	0

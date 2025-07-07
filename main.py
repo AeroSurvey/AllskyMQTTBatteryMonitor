@@ -3,7 +3,7 @@
 import json
 import logging
 
-import UpdateBatteryFile
+import UpdateBatteryFiles
 from mqtt import MQTTClient
 
 log = logging.getLogger(__name__)
@@ -16,7 +16,8 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
         self,
         broker: str,
         topic: str,
-        filepath: str,
+        filepathprogress: str,
+        filepathstatic: str,
         port: int = 1883,
         keepalive: int = 60,
     ) -> None:
@@ -25,13 +26,16 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
         Args:
             broker (str): The MQTT broker address.
             topic (str): The MQTT topic to monitor.
-            filepath (str): The path to the file to update on MQTT message
-                receipt.
+            filepathprogress (str): Path to the file to update data
+            variables on MQTT message receipt.
+            filepathstatic (str): Path to the file to update progress
+            variables on MQTT message
             port (int): The MQTT broker port. Defaults to 1883.
             keepalive (int): Keepalive interval in seconds. Defaults to 60.
         """
         super().__init__(broker, topic, port, keepalive)
-        self.filepath = filepath
+        self.filepathprogress = filepathprogress
+        self.filepathstatic = filepathstatic
 
     def handle_message(
         self,
@@ -48,7 +52,9 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
         data = json.loads(payload)
         battery_soc = int(data.get("battery_state_of_charge", "unknown"))
         battery_voltage = float(data.get("battery_voltage", "unknown"))
-        UpdateBatteryFile.update_battery_file(self.filepath, battery_soc,
+        UpdateBatteryFiles.update_battery_file(self.filepathprogress,
+                                              self.filepathstatic,
+                                              battery_soc,
                                               battery_voltage)
         logging.info(battery_soc)
         logging.info(f"{battery_voltage:.1f}")
@@ -57,7 +63,8 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
         """String representation of the AllSkyMQTTBatteryMonitor instance."""
         return (
             f"AllSkyMQTTBatteryMonitor(broker={self.broker}:{self.port}, "
-            f"topic={self.topic}, filepath={self.filepath})"
+            f"topic={self.topic}, filepathprogress={self.filepathprogress}, "
+            f"filepathstatic={self.filepathstatic})"
         )
 
 
@@ -81,10 +88,18 @@ def main() -> None:
         help="MQTT topic to monitor",
     )
     parser.add_argument(
-        "--filepath",
+        "--filepathprogress",
         type=str,
         required=True,
-        help="Path to the file to update on MQTT message receipt",
+        help="Path to the file to update progress bars on MQTT message " \
+        "receipt",
+    )
+    parser.add_argument(
+        "--filepathstatic",
+        type=str,
+        required=True,
+        help="Path to the file to update data variables on MQTT message " \
+        "receipt",
     )
     parser.add_argument(
         "--port",
