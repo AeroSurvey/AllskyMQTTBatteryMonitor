@@ -9,7 +9,7 @@ User=pi
 Group=pi
 WorkingDirectory=/home/pi/AllSkyMQTTBatteryMonitor
 Environment=PATH=/home/pi/AllSkyMQTTBatteryMonitor/.venv/bin
-ExecStart=/home/pi/AllSkyMQTTBatteryMonitor/.venv/bin/python /home/pi/AllSkyMQTTBatteryMonitor/main.py --broker mqtt.example.com --topic solar/dev-pi/data --filepath example
+ExecStart=/home/pi/AllSkyMQTTBatteryMonitor/.venv/bin/python /home/pi/AllSkyMQTTBatteryMonitor/main.py --172.17.204.35 --topic solar/pmallsky/data --/home/asi/AllskyMQTTBatteryMonitor/BatterySpecs.txt
 Restart=always
 RestartSec=10
 StandardOutput=journal
