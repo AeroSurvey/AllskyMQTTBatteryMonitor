@@ -5,8 +5,8 @@ data about the properties of a battery to post the data on the [Allsky](https://
 # Displaying Battery Data
 The battery data that is shown on the system page is the battery percent in a data type field then the battery percent with a progress type field.
 
-Battery Voltage
+Battery Voltage  
 ![BatteryVoltage](ReadMe_Images/BatteryVoltageDataOnSystemPage.png)
 
-Battery Percent
+Battery Percent  
 ![BatteryVoltage](ReadMe_Images/BatteryPercentDataOnSystemPage.png)
