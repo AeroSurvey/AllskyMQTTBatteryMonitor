@@ -35,6 +35,12 @@ Move into the AllskyMQTTBatteryMonitor folder.
 cd AllskyMQTTBatteryMonitor
 ```
 
+Sync uv
+
+```bash
+uv sync
+```
+
 Copy the systemd example file, removing the `.example` extension.
 
 ```bash
