@@ -1,0 +1,19 @@
+[Unit]
+Description=AllSky MQTT Battery Monitor
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=<user>
+Group=<user>
+WorkingDirectory=/home/<user>/AllskyMQTTBatteryMonitor
+Environment=PATH=/home/<user>/AllskyMQTTBatteryMonitor/.venv/bin
+ExecStart=/home/<user>/AllskyMQTTBatteryMonitor/.venv/bin/python /home/<user>/AllskyMQTTBatteryMonitor/main.py --broker <broker> --topic <topic> --filepathprogress /home/<user>/AllskyMQTTBatteryMonitor/BatteryPercent.txt --filepathstatic /home/<user>/AllskyMQTTBatteryMonitor/StaticVars.txt
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
