@@ -52,10 +52,12 @@ class AllSkyMQTTBatteryMonitor(MQTTClient):
         data = json.loads(payload)
         battery_soc = int(data.get("battery_state_of_charge", "unknown"))
         battery_voltage = float(data.get("battery_voltage", "unknown"))
-        UpdateBatteryFiles.update_battery_file(self.filepathprogress,
-                                              self.filepathstatic,
-                                              battery_soc,
-                                              battery_voltage)
+        UpdateBatteryFiles.update_battery_file(
+            self.filepathprogress,
+            self.filepathstatic,
+            battery_soc,
+            battery_voltage,
+        )
         logging.info(battery_soc)
         logging.info(f"{battery_voltage:.1f}")
 
@@ -91,14 +93,13 @@ def main() -> None:
         "--filepathprogress",
         type=str,
         required=True,
-        help="Path to the file to update progress bars on MQTT message " \
-        "receipt",
+        help="Path to the file to update progress bars on MQTT message receipt",
     )
     parser.add_argument(
         "--filepathstatic",
         type=str,
         required=True,
-        help="Path to the file to update data variables on MQTT message " \
+        help="Path to the file to update data variables on MQTT message "
         "receipt",
     )
     parser.add_argument(
@@ -117,7 +118,12 @@ def main() -> None:
     args = parser.parse_args()
 
     with AllSkyMQTTBatteryMonitor(
-        args.broker, args.topic, args.filepathprogress, args.filepathstatic, args.port, args.keepalive
+        args.broker,
+        args.topic,
+        args.filepathprogress,
+        args.filepathstatic,
+        args.port,
+        args.keepalive,
     ) as client:
         log.info(f"{client}")
         try:
