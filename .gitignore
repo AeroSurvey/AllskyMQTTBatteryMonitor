@@ -11,3 +11,7 @@ wheels/
 
 # ruff cache
 .ruff_cache/
+
+# Customized files
+StaticVars.txt
+AllskyMQTTBatteryMonitor.service
